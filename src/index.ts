@@ -41,6 +41,11 @@ const port = envConfig.port || 4000
 // Tạo folder uploads để lưu trữ file upload
 initFolder()
 app.use(express.json())
+
+app.use('/hello-world', (req, res) => {
+  res.send('Hello World')
+})
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 databaseService
   .connect()
