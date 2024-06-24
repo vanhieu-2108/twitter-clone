@@ -1,14 +1,17 @@
-FROM node:20-alpine3.16
+FROM node:22-alpine3.19
 
 WORKDIR /app
 
 COPY package.json .
 COPY package-lock.json .
+COPY tsconfig.json .
 COPY ecosystem.config.js .
 COPY .env.production .
 COPY ./src ./src
 COPY ./openapi ./openapi
-
+COPY ./twitter-swagger.yaml ./twitter-swagger.yaml
+  
+RUN apk add --no-cache ffmpeg
 RUN apk add python3
 RUN npm install pm2 -g
 RUN npm install
